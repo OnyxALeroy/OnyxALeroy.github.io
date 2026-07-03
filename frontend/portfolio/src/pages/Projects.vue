@@ -123,6 +123,10 @@ function renderMd(md: string): string {
   margin-bottom: 0.5rem;
 }
 
+.project__body {
+  flex: 1;
+}
+
 .project__desc {
   color: var(--text-bio);
   font-size: 0.9rem;

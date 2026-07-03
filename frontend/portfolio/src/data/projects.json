@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Game-related Website",
+    "description": "A website to help Warframe players on different aspects of their games.",
+    "imageUrl": null,
+    "projectUrl": null,
+    "githubUrl": "https://github.com/OnyxALeroy/Cephalon-Onni",
+    "technologies": "Python, FastAPI, Vue (TS), CSS, PostgreSQL"
+  },
+  {
+    "id": 2,
+    "title": "RPG in C",
+    "description": "A school project, coding a video game using C, from scratch (and with SDL2).",
+    "imageUrl": null,
+    "projectUrl": null,
+    "githubUrl": "https://github.com/OnyxALeroy/PP2I2-RPG",
+    "technologies": "C, SDL2"
+  },
+  {
+    "id": 3,
+    "title": "TODO App",
+    "description": "An Android app in Java to handle TODOs, sending notifications and handling tags.",
+    "imageUrl": null,
+    "projectUrl": null,
+    "githubUrl": "https://github.com/OnyxALeroy/todo-app",
+    "technologies": "Java, Android Studio, CSS"
+  }
+]

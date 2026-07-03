@@ -1,0 +1,16 @@
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/config/CorsConfig.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/model/AboutMe.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/service/AboutMeService.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/repository/SkillRepository.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/BackendApplication.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/controller/HomeController.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/controller/AboutMeController.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/controller/ProjectController.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/service/SkillService.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/repository/AboutMeRepository.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/controller/ImageController.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/model/Skill.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/service/ProjectService.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/model/Project.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/controller/SkillController.java
+/home/onyx/Documents/portfolio/backend/src/main/java/com/portfolio/backend/repository/ProjectRepository.java

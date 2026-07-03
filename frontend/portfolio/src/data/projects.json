@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Game-related Website",
     "description": "A website to help Warframe players on different aspects of their games.",
-    "details": "A web application designed to assist _Warframe_ players with various aspects of the game.\n\n**Features:**\n\n- Inventory management and optimization\n- Build tracking and sharing\n- Real-time game data integration\n\n**Architecture:**\n\n- **Backend:** FastAPI with PostgreSQL for data persistence\n- **Frontend:** Vue 3 with TypeScript for a responsive UI\n- **API:** RESTful design with automatic OpenAPI documentation",
+    "details": "**Features:**\n\n- Inventory management and optimization\n- Build tracking and sharing\n- Real-time game data integration\n\n**Architecture:**\n\n- **Backend:** FastAPI with PostgreSQL for data persistence\n- **Frontend:** Vue 3 with TypeScript for a responsive UI\n- **API:** RESTful design with automatic OpenAPI documentation",
     "imageUrl": null,
     "projectUrl": null,
     "githubUrl": "https://github.com/OnyxALeroy/Cephalon-Onni",
@@ -13,7 +13,7 @@
     "id": 2,
     "title": "RPG in C",
     "description": "A school project, coding a video game using C, from scratch (and with SDL2).",
-    "details": "A school project developed from scratch using **C** and **SDL2**.\n\n**Gameplay:**\n\n- Turn-based combat system\n- Inventory and equipment management\n- Multiple enemy types with different behaviors\n- Save / load game functionality\n\n**Technical Details:**\n\n- Custom game loop and event handling\n- Manual memory management\n- Sprite rendering with SDL2 textures\n- Collision detection system",
+    "details": "**Gameplay:**\n\n- Turn-based combat system\n- Inventory and equipment management\n- Multiple enemy types with different behaviors\n- Save / load game functionality\n\n**Technical Details:**\n\n- Custom game loop and event handling\n- Manual memory management\n- Sprite rendering with SDL2 textures\n- Collision detection system",
     "imageUrl": null,
     "projectUrl": null,
     "githubUrl": "https://github.com/OnyxALeroy/PP2I2-RPG",
@@ -23,10 +23,20 @@
     "id": 3,
     "title": "TODO App",
     "description": "An Android app in Java to handle TODOs, sending notifications and handling tags.",
-    "details": "An Android application built in **Java** for managing daily tasks.\n\n**Features:**\n\n- Create, edit, and delete tasks with ease\n- Tag-based organization system\n- Push notifications for upcoming deadlines\n- Persistent local storage\n- Material Design UI\n\n**Implementation:**\n\n- Built with Android SDK and Java\n- SQLite database for offline storage\n- AlarmManager for scheduled notifications\n- RecyclerView with custom adapter patterns",
+    "details": "**Features:**\n\n- Create, edit, and delete tasks with ease\n- Tag-based organization system\n- Push notifications for upcoming deadlines\n- Persistent local storage\n- Material Design UI\n\n**Implementation:**\n\n- Built with Android SDK and Java\n- SQLite database for offline storage\n- AlarmManager for scheduled notifications\n- RecyclerView with custom adapter patterns",
     "imageUrl": null,
     "projectUrl": null,
     "githubUrl": "https://github.com/OnyxALeroy/todo-app",
     "technologies": "Java, Android Studio, CSS"
+  },
+  {
+    "id": 4,
+    "title": "AI to play Pacman",
+    "description": "An AI, which plays Pacman, recreated in Unity.",
+    "details": "**AI Behavior:**\n\n- Pathfinding algorithm to navigate the maze\n- Decision-making for ghost evasion and pellet collection\n- Prioritisation of power pellets to turn the tide\n\n**Technical Details:**\n\n- Built with Unity 2D and Universal Render Pipeline\n- Custom C# scripts for game logic and AI\n- Unity Input System for optional manual controls\n- 2D sprite-based rendering with lit materials",
+    "imageUrl": null,
+    "projectUrl": null,
+    "githubUrl": "https://github.com/OnyxALeroy/IA-Pacman",
+    "technologies": "C#, Unity"
   }
 ]

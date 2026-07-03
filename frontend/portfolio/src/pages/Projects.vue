@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { marked } from 'marked'
 import projectsData from '@/data/projects.json'
 
 const projects = ref(projectsData)
 
 function techList(technologies: string): string[] {
   return technologies.split(', ').filter(Boolean)
+}
+
+function renderMd(md: string): string {
+  return marked.parse(md) as string
 }
 </script>
 
@@ -25,6 +30,11 @@ function techList(technologies: string): string[] {
           <div class="project__body">
             <h2 class="project__title">{{ project.title }}</h2>
             <p class="project__desc">{{ project.description }}</p>
+            <div
+              v-if="project.details"
+              class="project__details"
+              v-html="renderMd(project.details)"
+            ></div>
             <div v-if="project.technologies" class="project__tags">
               <span
                 v-for="tech in techList(project.technologies)"
@@ -65,7 +75,7 @@ function techList(technologies: string): string[] {
 
 <style scoped>
 .page {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -79,8 +89,8 @@ function techList(technologies: string): string[] {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .project-card {
@@ -96,7 +106,7 @@ function techList(technologies: string): string[] {
 
 .project__image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 0.5rem;
@@ -117,6 +127,52 @@ function techList(technologies: string): string[] {
   color: var(--text-bio);
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+.project__details {
+  color: var(--text-bio);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.project__details :deep(h1),
+.project__details :deep(h2),
+.project__details :deep(h3),
+.project__details :deep(h4) {
+  color: var(--text-heading);
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+}
+
+.project__details :deep(h2) {
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+
+.project__details :deep(ul),
+.project__details :deep(ol) {
+  padding-left: 1.25rem;
+  margin: 0.4rem 0;
+}
+
+.project__details :deep(li) {
+  margin-bottom: 0.25rem;
+}
+
+.project__details :deep(strong) {
+  color: var(--text-heading);
+}
+
+.project__details :deep(code) {
+  background: rgba(168, 85, 247, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.project__details :deep(p) {
+  margin: 0.4rem 0;
 }
 
 .project__tags {

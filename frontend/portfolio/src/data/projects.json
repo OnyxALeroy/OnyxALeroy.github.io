@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Game-related Website",
     "description": "A website to help Warframe players on different aspects of their games.",
-    "details": "A web application designed to assist _Warframe_ players with various aspects of the game.\n\n**Features:**\n\n- Relic management and optimization\n- Build tracking and sharing\n- Real-time game data integration\n\n**Architecture:**\n\n- **Backend:** FastAPI with PostgreSQL for data persistence\n- **Frontend:** Vue 3 with TypeScript for a responsive UI\n- **API:** RESTful design with automatic OpenAPI documentation",
+    "details": "A web application designed to assist _Warframe_ players with various aspects of the game.\n\n**Features:**\n\n- Inventory management and optimization\n- Build tracking and sharing\n- Real-time game data integration\n\n**Architecture:**\n\n- **Backend:** FastAPI with PostgreSQL for data persistence\n- **Frontend:** Vue 3 with TypeScript for a responsive UI\n- **API:** RESTful design with automatic OpenAPI documentation",
     "imageUrl": null,
     "projectUrl": null,
     "githubUrl": "https://github.com/OnyxALeroy/Cephalon-Onni",

@@ -12,6 +12,15 @@ onMounted(() => {
   }, 1000)
 })
 
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+    }, 1000)
+  })
+}
+
 function techList(technologies: string): string[] {
   return technologies.split(', ').filter(Boolean)
 }
@@ -22,76 +31,84 @@ function renderMd(md: string): string {
 </script>
 
 <template>
-  <div v-if="loading" class="loader">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div v-else class="page">
-    <div class="container">
-      <h1 class="page__title">Projects</h1>
+  <div class="projects-page">
+    <div v-if="loading" class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div v-else class="page">
+      <div class="container">
+        <h1 class="page__title">Projects</h1>
 
-      <div v-if="projects.length" class="projects-grid">
-        <div v-for="project in projects" :key="project.id" class="project-card">
-          <img
-            v-if="project.imageUrl"
-            :src="project.imageUrl"
-            :alt="project.title"
-            class="project__image"
-          />
-          <div class="project__body">
-            <h2 class="project__title">{{ project.title }}</h2>
-            <p class="project__desc">{{ project.description }}</p>
-            <div
-              v-if="project.details"
-              class="project__details"
-              v-html="renderMd(project.details)"
-            ></div>
-            <div v-if="project.technologies" class="project__tags">
-              <span
-                v-for="tech in techList(project.technologies)"
-                :key="tech"
-                class="tag"
+        <div v-if="projects.length" class="projects-grid">
+          <div v-for="project in projects" :key="project.id" class="project-card">
+            <img
+              v-if="project.imageUrl"
+              :src="project.imageUrl"
+              :alt="project.title"
+              class="project__image"
+            />
+            <div class="project__body">
+              <h2 class="project__title">{{ project.title }}</h2>
+              <p class="project__desc">{{ project.description }}</p>
+              <div
+                v-if="project.details"
+                class="project__details"
+                v-html="renderMd(project.details)"
+              ></div>
+              <div v-if="project.technologies" class="project__tags">
+                <span
+                  v-for="tech in techList(project.technologies)"
+                  :key="tech"
+                  class="tag"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+            <div class="project__footer">
+              <a
+                v-if="project.projectUrl"
+                :href="project.projectUrl"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--primary"
               >
-                {{ tech }}
-              </span>
+                Live Demo
+              </a>
+              <a
+                v-if="project.githubUrl"
+                :href="project.githubUrl"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline"
+              >
+                Source
+              </a>
             </div>
           </div>
-          <div class="project__footer">
-            <a
-              v-if="project.projectUrl"
-              :href="project.projectUrl"
-              target="_blank"
-              rel="noopener"
-              class="btn btn--primary"
-            >
-              Live Demo
-            </a>
-            <a
-              v-if="project.githubUrl"
-              :href="project.githubUrl"
-              target="_blank"
-              rel="noopener"
-              class="btn btn--outline"
-            >
-              Source
-            </a>
-          </div>
         </div>
-      </div>
 
-      <p v-else class="empty">No projects to display.</p>
+        <p v-else class="empty">No projects to display.</p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.projects-page {
+  min-height: calc(100vh - 60px - 4rem);
+  display: flex;
+  flex-direction: column;
+}
+
 .loader {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 200px;
+  flex: 1;
 }
 
 .loader span {

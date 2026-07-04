@@ -6,11 +6,15 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  appType: 'spa',
   base: '/',
   plugins: [
     vue(),
     vueDevTools(),
   ],
+  server: {
+    historyApiFallback: true,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

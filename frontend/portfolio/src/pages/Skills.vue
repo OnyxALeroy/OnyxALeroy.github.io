@@ -5,6 +5,10 @@ import skillsData from '@/data/skills.json'
 const skills = ref(skillsData)
 const activeCategory = ref<string | null>(null)
 
+function repoName(url: string): string {
+  return url.substring(url.lastIndexOf('/') + 1)
+}
+
 const categories = computed(() => {
   const set = new Set(skills.value.map((s) => s.category))
   return Array.from(set)
@@ -27,6 +31,10 @@ const filtered = computed(() => {
     .filter((s) => s.category === activeCategory.value)
     .sort((a, b) => b.proficiency - a.proficiency)
 })
+
+function dotCount(proficiency: number): number {
+  return Math.round(proficiency / 20)
+}
 </script>
 
 <template>
@@ -60,28 +68,76 @@ const filtered = computed(() => {
           class="category-group"
         >
           <h2 class="category__title">{{ cat }}</h2>
-          <div class="skills-chips">
-            <span
+          <div class="skills-grid">
+            <div
               v-for="skill in catSkills"
               :key="skill.id + skill.name"
-              class="chip"
-              :style="{ '--rank': (catSkills.indexOf(skill) + 1) }"
+              class="skill-card"
             >
-              {{ skill.name }}
-            </span>
+              <div class="skill-card__head">
+                <span class="skill-card__name">{{ skill.name }}</span>
+                <div class="skill-dots">
+                  <span
+                    v-for="i in 5"
+                    :key="i"
+                    class="dot"
+                    :class="{ 'dot--filled': i <= dotCount(skill.proficiency) }"
+                  ></span>
+                </div>
+              </div>
+              <div
+                v-if="skill.githubUrls.length"
+                class="skill-card__projects"
+              >
+                <a
+                  v-for="url in skill.githubUrls"
+                  :key="url"
+                  :href="url"
+                  target="_blank"
+                  rel="noopener"
+                  class="skill-project-link"
+                >
+                  {{ repoName(url) }}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div v-else-if="filtered.length" class="skills-chips">
-        <span
+      <div v-else-if="filtered.length" class="skills-grid">
+        <div
           v-for="skill in filtered"
           :key="skill.id + skill.name"
-          class="chip"
-          :style="{ '--rank': (filtered.indexOf(skill) + 1) }"
+          class="skill-card"
         >
-          {{ skill.name }}
-        </span>
+          <div class="skill-card__head">
+            <span class="skill-card__name">{{ skill.name }}</span>
+            <div class="skill-dots">
+              <span
+                v-for="i in 5"
+                :key="i"
+                class="dot"
+                :class="{ 'dot--filled': i <= dotCount(skill.proficiency) }"
+              ></span>
+            </div>
+          </div>
+          <div
+            v-if="skill.githubUrls.length"
+            class="skill-card__projects"
+          >
+            <a
+              v-for="url in skill.githubUrls"
+              :key="url"
+              :href="url"
+              target="_blank"
+              rel="noopener"
+              class="skill-project-link"
+            >
+              {{ repoName(url) }}
+            </a>
+          </div>
+        </div>
       </div>
 
       <p v-else class="empty">No skills to display.</p>
@@ -142,38 +198,90 @@ const filtered = computed(() => {
 .skills-categories {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .category__title {
   color: var(--accent-light);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
   letter-spacing: 1px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
 }
 
-.skills-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
 }
 
-.chip {
+.skill-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-heading);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
   transition: all 0.2s;
 }
 
-.chip:hover {
+.skill-card:hover {
   border-color: var(--accent);
-  color: var(--accent);
   transform: translateY(-1px);
+}
+
+.skill-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.skill-card__name {
+  color: var(--text-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.skill-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.dot--filled {
+  background: var(--accent);
+}
+
+.skill-card__projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.skill-project-link {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: rgba(168, 85, 247, 0.08);
+  color: var(--accent);
+  transition: all 0.2s;
+}
+
+.skill-project-link:hover {
+  background: var(--accent);
+  color: var(--btn-text);
+  text-decoration: none;
 }
 
 .empty {

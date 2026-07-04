@@ -10,9 +10,22 @@ const categories = computed(() => {
   return Array.from(set)
 })
 
+const grouped = computed(() => {
+  const all = skills.value.slice().sort((a, b) => b.proficiency - a.proficiency)
+  const map = new Map<string, typeof all>()
+  for (const skill of all) {
+    const cat = skill.category
+    if (!map.has(cat)) map.set(cat, [])
+    map.get(cat)!.push(skill)
+  }
+  return map
+})
+
 const filtered = computed(() => {
-  if (!activeCategory.value) return skills.value
-  return skills.value.filter((s) => s.category === activeCategory.value)
+  if (!activeCategory.value) return skills.value.slice().sort((a, b) => b.proficiency - a.proficiency)
+  return skills.value
+    .filter((s) => s.category === activeCategory.value)
+    .sort((a, b) => b.proficiency - a.proficiency)
 })
 </script>
 
@@ -40,19 +53,35 @@ const filtered = computed(() => {
         </button>
       </div>
 
-      <div v-if="filtered.length" class="skills-grid">
-        <div v-for="skill in filtered" :key="skill.id" class="skill-card">
-          <div class="skill__info">
-            <span class="skill__name">{{ skill.name }}</span>
-            <span class="skill__pct">{{ skill.proficiency }}%</span>
-          </div>
-          <div class="skill__bar">
-            <div
-              class="skill__fill"
-              :style="{ width: skill.proficiency + '%' }"
-            ></div>
+      <div v-if="activeCategory === null" class="skills-categories">
+        <div
+          v-for="[cat, catSkills] in grouped"
+          :key="cat"
+          class="category-group"
+        >
+          <h2 class="category__title">{{ cat }}</h2>
+          <div class="skills-chips">
+            <span
+              v-for="skill in catSkills"
+              :key="skill.id + skill.name"
+              class="chip"
+              :style="{ '--rank': (catSkills.indexOf(skill) + 1) }"
+            >
+              {{ skill.name }}
+            </span>
           </div>
         </div>
+      </div>
+
+      <div v-else-if="filtered.length" class="skills-chips">
+        <span
+          v-for="skill in filtered"
+          :key="skill.id + skill.name"
+          class="chip"
+          :style="{ '--rank': (filtered.indexOf(skill) + 1) }"
+        >
+          {{ skill.name }}
+        </span>
       </div>
 
       <p v-else class="empty">No skills to display.</p>
@@ -110,54 +139,41 @@ const filtered = computed(() => {
   color: var(--btn-text);
 }
 
-.skills-grid {
-  display: grid;
-  gap: 1rem;
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.skill-card {
+.category__title {
+  color: var(--accent-light);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.25rem;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-heading);
   transition: all 0.2s;
 }
 
-.skill-card:hover {
+.chip:hover {
   border-color: var(--accent);
-}
-
-.skill__info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-
-.skill__name {
-  color: var(--text-heading);
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.skill__pct {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.skill__bar {
-  height: 8px;
-  background: var(--bg-nav);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.skill__fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), #e879f9);
-  border-radius: 4px;
-  transition: width 0.6s ease;
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .empty {

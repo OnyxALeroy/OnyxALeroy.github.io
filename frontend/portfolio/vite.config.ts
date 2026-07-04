@@ -12,9 +12,6 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  server: {
-    historyApiFallback: true,
-  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

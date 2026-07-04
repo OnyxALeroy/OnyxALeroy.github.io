@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { marked } from 'marked'
 import projectsData from '@/data/projects.json'
 
 const projects = ref(projectsData)
+const loading = ref(true)
+
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+  }, 1000)
+})
 
 function techList(technologies: string): string[] {
   return technologies.split(', ').filter(Boolean)
@@ -15,7 +22,12 @@ function renderMd(md: string): string {
 </script>
 
 <template>
-  <div class="page">
+  <div v-if="loading" class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div v-else class="page">
     <div class="container">
       <h1 class="page__title">Projects</h1>
 
@@ -74,6 +86,41 @@ function renderMd(md: string): string {
 </template>
 
 <style scoped>
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 200px;
+}
+
+.loader span {
+  width: 14px;
+  height: 14px;
+  border-radius:50%;
+  background:#38bdf8;
+  animation:bounce .8s infinite ease-in-out;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform:translateY(-14px);
+    opacity: 1;
+  }
+}
+
 .page {
   max-width: 1100px;
   margin: 0 auto;

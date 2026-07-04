@@ -7,6 +7,11 @@ const { init } = useTheme()
 
 onMounted(() => {
   init()
+
+  setTimeout(() => {
+    const htmlLoader = document.getElementById('app-loader')
+    if (htmlLoader) htmlLoader.remove()
+  }, 1000)
 })
 </script>
 

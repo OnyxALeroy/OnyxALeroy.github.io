@@ -76,6 +76,7 @@ function dotCount(proficiency: number): number {
             >
               <div class="skill-card__head">
                 <span class="skill-card__name">{{ skill.name }}</span>
+                <span style="font-size:0.6rem;color:var(--text-dim)">[{{ skill.githubUrls.length }} urls: {{ skill.githubUrls.join(', ') }}]</span>
                 <div class="skill-dots">
                   <span
                     v-for="i in 5"
@@ -113,6 +114,7 @@ function dotCount(proficiency: number): number {
         >
           <div class="skill-card__head">
             <span class="skill-card__name">{{ skill.name }}</span>
+            <span style="font-size:0.6rem;color:var(--text-dim)">[{{ skill.githubUrls.length }} urls: {{ skill.githubUrls.join(', ') }}]</span>
             <div class="skill-dots">
               <span
                 v-for="i in 5"

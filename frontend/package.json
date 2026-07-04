@@ -4,8 +4,11 @@
     "build": "npm run build -w portfolio",
     "type-check": "npm run type-check -w portfolio"
   },
-  "workspaces": ["portfolio"],
+  "workspaces": [
+    "portfolio"
+  ],
   "dependencies": {
+    "playwright": "^1.61.1",
     "vue": "^3.5.39"
   }
 }
